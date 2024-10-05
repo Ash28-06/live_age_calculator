@@ -37,6 +37,11 @@
             color: red; /* Change age output color to red */
             font-size: 24px; /* Adjust font size for age output */
         }
+        select {
+            font-size: 18px;
+            padding: 10px;
+            margin: 10px;
+        }
     </style>
 </head>
 <body>
@@ -46,6 +51,17 @@
     <!-- Input fields to enter birth date and a button to start calculation -->
     <input type="date" id="birthDateInput" required>
     <button onclick="startCalculation()">Calculate Age</button>
+
+    <!-- Dropdown to select time unit -->
+    <select id="timeUnit">
+        <option value="years">Years</option>
+        <option value="days">Days</option>
+        <option value="weeks">Weeks</option>
+        <option value="hours">Hours</option>
+        <option value="minutes">Minutes</option>
+        <option value="seconds">Seconds</option>
+    </select>
+    <button onclick="showAgeInUnit()">Show Age in Selected Unit</button>
 
     <!-- Section to display the calculated age -->
     <p id="age"></p>
@@ -72,10 +88,47 @@
             const now = new Date();
             const ageInMilliseconds = now - birthDate;
             const ageInSeconds = ageInMilliseconds / 1000;
-            const ageInYears = ageInSeconds / (365.25 * 24 * 60 * 60); // considering leap years
 
-            // Display age with 15 decimal places
-            document.getElementById('age').innerText = `Your exact age is: ${ageInYears.toFixed(20)} years`;
+            // Display age with 15 decimal places in years
+            document.getElementById('age').innerText = `Your exact age is: ${ageInSeconds / (365.25 * 24 * 60 * 60)} years`;
+        }
+
+        // Function to show age in the selected unit
+        function showAgeInUnit() {
+            if (!birthDate) return; // Return if birth date is not set
+            
+            const now = new Date();
+            const ageInMilliseconds = now - birthDate;
+            const ageInSeconds = ageInMilliseconds / 1000;
+
+            const selectedUnit = document.getElementById('timeUnit').value;
+            let ageOutput;
+
+            switch (selectedUnit) {
+                case 'years':
+                    ageOutput = ageInSeconds / (365.25 * 24 * 60 * 60);
+                    break;
+                case 'days':
+                    ageOutput = ageInMilliseconds / (1000 * 60 * 60 * 24);
+                    break;
+                case 'weeks':
+                    ageOutput = ageInMilliseconds / (1000 * 60 * 60 * 24 * 7);
+                    break;
+                case 'hours':
+                    ageOutput = ageInMilliseconds / (1000 * 60 * 60);
+                    break;
+                case 'minutes':
+                    ageOutput = ageInMilliseconds / (1000 * 60);
+                    break;
+                case 'seconds':
+                    ageOutput = ageInSeconds;
+                    break;
+                default:
+                    ageOutput = ageInSeconds;
+            }
+
+            // Display the age in the selected unit with 15 decimal places
+            document.getElementById('age').innerText = `Your exact age is: ${ageOutput.toFixed(15)} ${selectedUnit}`;
         }
     </script>
 </body>
