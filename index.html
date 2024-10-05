@@ -37,17 +37,17 @@
             color: red; /* Change age output color to red */
             font-size: 24px; /* Adjust font size for age output */
         }
+        /* Flexbox for aligning buttons and dropdown */
+        .controls {
+            display: flex;
+            justify-content: center; /* Center align controls */
+            align-items: center; /* Align items vertically in the center */
+            margin: 20px 0; /* Margin for spacing */
+        }
         select {
             font-size: 18px;
             padding: 10px;
-            margin: 10px;
-            display: inline-block; /* Allow the dropdown to stay centered */
-            text-align: center; /* Center text in the dropdown */
-        }
-        .container {
-            display: flex; /* Use flexbox to center items */
-            flex-direction: column; /* Arrange items in a column */
-            align-items: center; /* Center align items */
+            margin-left: 10px; /* Add space between button and dropdown */
         }
     </style>
 </head>
@@ -55,13 +55,11 @@
     <h1>Live Age Calculator</h1>
     <p>Enter your birth date to see your exact age in real-time!</p>
     
-    <!-- Container for centered alignment -->
-    <div class="container">
-        <!-- Input fields to enter birth date and a button to start calculation -->
-        <input type="date" id="birthDateInput" required>
-        <button onclick="calculateAge()">Calculate Age</button>
+    <!-- Input fields to enter birth date and a button to start calculation -->
+    <input type="date" id="birthDateInput" required>
 
-        <!-- Dropdown to select time unit -->
+    <div class="controls">
+        <button onclick="calculateAge()">Calculate Age</button>
         <select id="timeUnit" onchange="updateAge()">
             <option value="years">Years</option>
             <option value="days">Days</option>
