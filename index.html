@@ -50,10 +50,10 @@
     
     <!-- Input fields to enter birth date and a button to start calculation -->
     <input type="date" id="birthDateInput" required>
-    <button onclick="startCalculation()">Calculate Age</button>
+    <button onclick="calculateAge()">Calculate Age</button>
 
     <!-- Dropdown to select time unit -->
-    <select id="timeUnit">
+    <select id="timeUnit" onchange="updateAge()">
         <option value="years">Years</option>
         <option value="days">Days</option>
         <option value="weeks">Weeks</option>
@@ -61,7 +61,6 @@
         <option value="minutes">Minutes</option>
         <option value="seconds">Seconds</option>
     </select>
-    <button onclick="showAgeInUnit()">Show Age in Selected Unit</button>
 
     <!-- Section to display the calculated age -->
     <p id="age"></p>
@@ -69,33 +68,20 @@
     <script>
         let birthDate; // Variable to store the user's birth date
 
-        // Function to start the calculation based on the input date
-        function startCalculation() {
+        // Function to calculate and display age
+        function calculateAge() {
             const inputDate = document.getElementById('birthDateInput').value;
             if (inputDate) {
                 birthDate = new Date(inputDate);
-                calculateAge();
-                setInterval(calculateAge, 1000); // Update the age every second
+                updateAge(); // Call updateAge to display the initial age in years
+                setInterval(updateAge, 1000); // Update the age every second
             } else {
                 alert('Please enter a valid birth date.');
             }
         }
 
-        // Function to calculate and display age in years
-        function calculateAge() {
-            if (!birthDate) return; // Return if birth date is not set
-            
-            const now = new Date();
-            const ageInMilliseconds = now - birthDate;
-            const ageInSeconds = ageInMilliseconds / 1000;
-
-            // Display age with 15 decimal places in years
-            const ageInYears = ageInSeconds / (365.25 * 24 * 60 * 60);
-            document.getElementById('age').innerText = `Your exact age is: ${ageInYears.toFixed(15)} years`;
-        }
-
-        // Function to show age in the selected unit
-        function showAgeInUnit() {
+        // Function to update and display age in the selected unit
+        function updateAge() {
             if (!birthDate) return; // Return if birth date is not set
             
             const now = new Date();
