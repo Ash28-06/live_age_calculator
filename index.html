@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Age Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        h1 {
+            font-size: 48px;
+        }
+        p {
+            font-size: 24px;
+        }
+        input, button {
+            font-size: 18px;
+            padding: 10px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Live Age Calculator</h1>
+    <p>Enter your birth date to see your exact age in real-time!</p>
+    
+    <!-- Input fields to enter birth date and a button to start calculation -->
+    <input type="date" id="birthDateInput" required>
+    <button onclick="startCalculation()">Calculate Age</button>
+
+    <!-- Section to display the calculated age -->
+    <p id="age"></p>
+
+    <script>
+        let birthDate; // Variable to store the user's birth date
+
+        // Function to start the calculation based on the input date
+        function startCalculation() {
+            const inputDate = document.getElementById('birthDateInput').value;
+            if (inputDate) {
+                birthDate = new Date(inputDate);
+                calculateAge();
+                setInterval(calculateAge, 1000); // Update the age every second
+            } else {
+                alert('Please enter a valid birth date.');
+            }
+        }
+
+        // Function to calculate age based on birth date and current date
+        function calculateAge() {
+            if (!birthDate) return; // Return if birth date is not set
+            
+            const now = new Date();
+            const ageInMilliseconds = now - birthDate;
+            const ageInSeconds = ageInMilliseconds / 1000;
+            const ageInYears = ageInSeconds / (365.25 * 24 * 60 * 60); // considering leap years
+
+            // Display age with 15 decimal places
+            document.getElementById('age').innerText = `Your exact age is: ${ageInYears.toFixed(15)} years`;
+        }
+    </script>
+</body>
+</html>
