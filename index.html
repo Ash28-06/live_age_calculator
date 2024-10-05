@@ -16,10 +16,26 @@
         p {
             font-size: 24px;
         }
-        input, button {
+        input {
             font-size: 18px;
             padding: 10px;
             margin: 10px;
+        }
+        button {
+            font-size: 18px;
+            padding: 10px;
+            margin: 10px;
+            background-color: #ADD8E6; /* Light blue background */
+            border: none; /* Remove default border */
+            border-radius: 5px; /* Optional: rounded corners */
+            cursor: pointer; /* Change cursor to pointer on hover */
+        }
+        button:hover {
+            background-color: #87CEEB; /* Slightly darker blue on hover */
+        }
+        #age {
+            color: red; /* Change age output color to red */
+            font-size: 24px; /* Adjust font size for age output */
         }
     </style>
 </head>
@@ -59,7 +75,7 @@
             const ageInYears = ageInSeconds / (365.25 * 24 * 60 * 60); // considering leap years
 
             // Display age with 15 decimal places
-            document.getElementById('age').innerText = `Your exact age is: ${ageInYears.toFixed(15)} years`;
+            document.getElementById('age').innerText = `Your exact age is: ${ageInYears.toFixed(20)} years`;
         }
     </script>
 </body>
