@@ -81,7 +81,7 @@
             }
         }
 
-        // Function to calculate age based on birth date and current date
+        // Function to calculate and display age in years
         function calculateAge() {
             if (!birthDate) return; // Return if birth date is not set
             
@@ -90,7 +90,8 @@
             const ageInSeconds = ageInMilliseconds / 1000;
 
             // Display age with 15 decimal places in years
-            document.getElementById('age').innerText = `Your exact age is: ${ageInSeconds / (365.25 * 24 * 60 * 60)} years`;
+            const ageInYears = ageInSeconds / (365.25 * 24 * 60 * 60);
+            document.getElementById('age').innerText = `Your exact age is: ${ageInYears.toFixed(15)} years`;
         }
 
         // Function to show age in the selected unit
